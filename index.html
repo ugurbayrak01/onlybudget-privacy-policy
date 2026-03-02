@@ -28,6 +28,12 @@ body {
   color: var(--text-light);
 }
 
+.intro {
+  border-left: 3px solid var(--accent);
+  padding-left: 14px;
+  margin-bottom: 32px;
+}
+
 h1 {
   font-size: 28px;
   margin-bottom: 8px;
@@ -35,8 +41,8 @@ h1 {
 }
 
 h2 {
-  margin-top: 40px;
-  font-size: 22px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   color: var(--accent);
 }
 
@@ -51,11 +57,48 @@ p {
 }
 
 ul {
-  padding-left: 20px;
+  list-style: none;
+  padding-left: 0;
+}
+
+ul li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 6px;
+}
+
+ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  opacity: 0.7;
+}
+
+a {
+  color: var(--accent);
 }
 
 strong {
   color: var(--accent);
+}
+
+.contact-box {
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.divider-accent {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--accent), transparent);
+  margin: 48px 0;
+  border: none;
 }
 
 /* Dark mode */
@@ -64,6 +107,10 @@ strong {
     background-color: var(--bg-dark);
     color: var(--text-dark);
   }
+  
+  h2 {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
 }
 </style>
 </head>
@@ -71,9 +118,11 @@ strong {
 <body>
 
 <h1>Privacy Policy for OnlyBudget</h1>
-<p>Last Updated: October 21, 2025</p>
+<p><strong>Last Updated: October 21, 2025</strong></p>
 
+<div class="intro">
 <p>Thank you for choosing OnlyBudget! Protecting your privacy is fundamental to me. This Privacy Policy explains how I collect, use, disclose, and safeguard your information when you use my mobile application.</p>
+</div>
 
 <h2>Information I Collect</h2>
 
@@ -103,17 +152,20 @@ strong {
 </ul>
 
 <h3>Financial Data</h3>
-<p>All your financial data is stored locally on your device and never sent to any server.</p>
-<p>I do not have access to your financial data unless you explicitly choose to back it up to your Google Drive.</p>
+<ul>
+<li>All your financial data is stored locally on your device and never sent to any server.</li>
+<li>I do not have access to your financial data unless you explicitly choose to back it up to your Google Drive.</li>
+</ul>
 
 <h3>Google Drive Backup (Optional)</h3>
+<p>If you choose to enable Google Drive cloud backup:</p>
 <ul>
 <li>Your financial data is backed up to your personal Google Drive account.</li>
-<li>Backups are stored in the hidden AppData folder of your Google Drive.</li>
+<li>Backups are stored in the hidden AppData folder of your Google Drive, which is accessible only to the app and cannot be viewed or modified manually.</li>
 <li>I do not have access to your Google Drive or the backed-up data.</li>
 <li>The backup is stored in your own Google Drive storage space.</li>
 <li>Google Drive access tokens are encrypted and stored securely on your device.</li>
-<li>You can revoke access at any time through your Google Account settings.</li>
+<li>You can revoke access to Google Drive at any time through your Google Account settings.</li>
 </ul>
 
 <h2>How I Use Your Information</h2>
@@ -121,8 +173,8 @@ strong {
 <h3>Authentication Data</h3>
 <ul>
 <li>Your email address is used solely for authentication purposes.</li>
-<li>Your UID and Google Drive refresh token are stored in Cloud Firestore to maintain your Google Drive session.</li>
-<li>Google Drive tokens are encrypted and stored securely using Android’s DataStore.</li>
+<li>Your User ID (UID) and Google Drive refresh token are stored in Cloud Firestore to maintain your Google Drive session.</li>
+<li>Google Drive access and refresh tokens are encrypted and stored securely using Android’s DataStore.</li>
 </ul>
 
 <h3>Financial Data</h3>
@@ -136,50 +188,140 @@ strong {
 
 <h3>Local Storage</h3>
 <ul>
-<li>Financial data is stored locally using Android’s secure Room database.</li>
-<li>Authentication tokens are encrypted using DataStore.</li>
-<li>Your device security (screen lock, encryption) provides additional protection.</li>
+<li>All your financial data is stored locally on your device using Android's secure Room database within the app's private storage area, inaccessible to other apps.</li>
+<li>Google Drive access and refresh tokens are encrypted and stored securely using Android’s DataStore.</li>
+<li>Data on your device is further protected by your device’s security features (such as screen lock and encryption).</li>
 </ul>
 
 <h3>Cloud Firestore</h3>
 <ul>
-<li>Only UID and Google Drive refresh token are stored.</li>
-<li>Data is encrypted in transit (HTTPS/TLS) and at rest.</li>
-<li>Firestore is protected by Google Cloud infrastructure.</li>
+<li>Only your User ID (UID) and Google Drive refresh token are stored in Cloud Firestore for authentication purposes.</li>
+<li>Data in Firestore is encrypted both in transit (HTTPS/TLS) and at rest.</li>
+<li>Cloud Firestore is managed by Google Cloud and protected by Google's enterprise-grade security infrastructure.</li>
 </ul>
 
 <h3>Google Drive Backup</h3>
 <ul>
-<li>Data is transmitted securely over HTTPS/TLS.</li>
-<li>Backup remains under your control in your Google Drive.</li>
+<li>When you enable cloud backup, your financial data is securely transmitted over an encrypted connection (HTTPS/TLS) and uploaded only to your personal Google Drive account.</li>
+<li>Google Drive access and refresh tokens are encrypted and stored securely on your device.</li>
+<li>Your backup data remains under your full control within your Google Drive account, protected by Google’s security infrastructure.</li>
+</ul>
+
+<h3>Security Measures</h3>
+<p>I implement industry-standard security practices to protect your data:</p>
+<ul>
+<li>Secure local storage using Room database within app’s private storage.</li>
+<li>Encrypted storage of Google Drive authentication tokens using DataStore.</li>
+<li>Encrypted transmission of data to Google Drive (HTTPS/TLS).</li>
+<li>No financial data is transmitted to any third-party or external servers.</li>
 </ul>
 
 <h2>Third-Party Services</h2>
+
+<h3>Google Sign-In API</h3>
 <ul>
-<li>Google Sign-In API</li>
-<li>Cloud Firestore</li>
-<li>Google Drive API</li>
+<li>The app uses Google Sign-In for authentication.</li>
+<li>Your Google account information is handled in accordance with <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+<li>Only the minimum necessary permissions (email and basic profile) are requested to enable sign-in.</li>
+</ul>
+
+<h3>Cloud Firestore</h3>
+<ul>
+<li>The app uses Cloud Firestore (a Google Cloud service) to store authentication tokens for login session management.</li>
+<li>Cloud Firestore stores only your User ID (UID) and Google Drive refresh token.</li>
+<li>Data is encrypted in transit (HTTPS/TLS) and at rest.</li>
+<li>Cloud Firestore is governed by Google Cloud’s <a href="https://cloud.google.com/terms/cloud-privacy-notice" target="_blank">Privacy Policy</a> and <a href="https://cloud.google.com/terms" target="_blank">Terms of Service</a>.</li>
+</ul>
+
+<h3>Google Drive API</h3>
+<ul>
+<li>The app uses Google Drive API for optional cloud backup functionality.</li>
+<li>Google’s use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank">Google API Services User Data Policy</a>, including the Limited Use requirements.</li>
+<li>Only the minimum necessary permissions are requested to back up and restore your data.</li>
+<li>Your Google account information is handled in accordance with <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+</ul>
+
+<h3>Third-Party Links</h3>
+<ul>
+<li>The app may include links to third-party websites or services for additional functionality or resources.</li>
+<li>These third-party sites have their own privacy policies, which are not controlled by me.</li>
+<li>I encourage you to review the privacy policies of any third-party sites or services before providing any information.</li>
 </ul>
 
 <h2>Your Rights and Choices</h2>
+
+<h3>Data Access and Control</h3>
 <ul>
-<li>You can view, edit, or delete local transactions at any time.</li>
-<li>You can enable or disable Google Drive backup.</li>
-<li>You can delete all data using “Reset All Data”.</li>
-<li>You can revoke Google Drive access anytime.</li>
+<li><strong>Local Data:</strong> You have complete control over your data stored on your device. You can view, edit, or delete any transaction at any time.</li>
+<li><strong>Google Drive Backup:</strong> You can enable or disable cloud backup at any time in the app settings.</li>
+<li><strong>Data Deletion:</strong> You can delete all your locally stored financial data using the "Reset All Data" option in the app settings.</li>
+<li><strong>Google Drive Access:</strong> You can revoke the app's access to your Google Drive at any time through your Google Account permissions.</li>
+<li><strong>Cloud Firestore Data:</strong> When you sign out from the app, your authentication session remains stored in Cloud Firestore until the refresh token expires or is revoked by Google.</li>
+</ul>
+
+<h3>Data Portability</h3>
+<ul>
+<li>All your financial data is stored in a standard SQLite database format on your device.</li>
+<li>If you enable Google Drive backup, your backup file is also available in your Google Drive account.</li>
+</ul>
+
+<h2>Data Retention</h2>
+<ul>
+<li><strong>Local Data:</strong> Your data remains on your device until you delete it or uninstall the app.</li>
+<li><strong>Google Drive Backup:</strong> Your backup remains in your Google Drive until you delete it manually.</li>
+<li><strong>Cloud Firestore:</strong> Your UID and Google Drive refresh token remain stored in Cloud Firestore until the refresh token expires or you revoke access.</li>
+<li><strong>Uninstalling the App:</strong> When you uninstall the app, all local data is automatically deleted from your device. Google Drive backups remain until you manually delete them from your Google Drive. Cloud Firestore data (UID and Google Drive refresh token) remains stored indefinitely but becomes unusable when revoked or expired.</li>
 </ul>
 
 <h2>Children's Privacy</h2>
-<p>The app is not intended for children under 13. I do not knowingly collect personal information from children under 13.</p>
+<p>The app is not intended for use by children under the age of 13. I do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided personal information, please contact me immediately.</p>
+
+<h2>International Data Transfers</h2>
+<p>Since all your financial data is stored locally on your device or in your personal Google Drive account, there are no international transfers of your financial data by me. However:</p>
+<ul>
+<li>Cloud Firestore may store authentication data in various Google Cloud data center locations.</li>
+<li>Google Drive may store data in different regions according to Google’s infrastructure.</li>
+</ul>
 
 <h2>Changes to This Privacy Policy</h2>
-<p>I may update this Privacy Policy periodically. Continued use of the app constitutes acceptance of the updated policy.</p>
+<p>I may update this Privacy Policy periodically to reflect:</p>
+<ul>
+<li>Changes in data practices</li>
+<li>New features or functionality</li>
+<li>Changes in legal requirements</li>
+<li>User feedback and concerns</li>
+</ul>
+<p>I will notify you of any material changes by:</p>
+<ul>
+<li>Posting the updated policy on the Play Store</li>
+<li>Updating the "Last Updated" date at the top of this policy</li>
+<li>Providing an in-app notification for significant updates (when applicable)s</li>
+</ul>
+<p>Your continued use of the app after any changes constitutes your acceptance of the updated Privacy Policy.</p>
 
+<h2>Compliance</h2>
+<p>This Privacy Policy complies with:</p>
+<ul>
+<li>Google Play Developer Program Policies</li>
+<li>Google API Services User Data Policy</li>
+<li>General Data Protection Regulation (GDPR) principles</li>
+<li>California Consumer Privacy Act (CCPA) principles</li>
+<li>Other applicable privacy laws and regulations</li>
+</ul>
+
+<div class="contact-box">
 <h2>Contact Me</h2>
-<p>Email: <strong>onlybudgetapp@gmail.com</strong></p>
+<p>If you have any questions, concerns, or requests regarding this Privacy Policy or data practices, please contact me:</p>
+<p><strong>Email: <a href="mailto:onlybudgetapp@gmail.com" target="_blank">onlybudgetapp@gmail.com</a></strong></p>
+<p>I will respond to your inquiry within a reasonable timeframe, typically within 30 days.</p>
+</div>
 
 <h2>Consent</h2>
-<p>By using OnlyBudget, you acknowledge that you have read and understood this Privacy Policy and agree to its terms.</p>
+<p>By using OnlyBudget, you acknowledge that you have read and understood this Privacy Policy and agree to its terms. If you do not agree, please do not use the app.</p>
+
+<hr class="divider-accent">
+
+<p><strong>Note:</strong> This Privacy Policy applies only to the OnlyBudget mobile application and does not apply to any third-party applications, websites, or services that may be linked from the app.</p>
 
 </body>
 </html>
